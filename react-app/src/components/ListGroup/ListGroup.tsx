@@ -19,6 +19,9 @@ Cannot iterate with JSX
 
 
 //when rendering a list, each child in list should have a unique key
+import {ReactComponentElement} from "react";
+import { MouseEvent } from "react";
+
 function ListGroup(){
 
     const header = <h1>My List Group</h1>
@@ -30,6 +33,8 @@ function ListGroup(){
         'Fairborn'
     ]
 
+    let selectedListItem = -1
+
     if(items.length === 0){
         return (
             <>
@@ -39,9 +44,18 @@ function ListGroup(){
         )
     }
 
+    const handleEvent = (event: MouseEvent) =>{
+        //set selectedListItem to index??
+    }
 
-   const mapped_items = items.map((item: string) => {
-        return <li key={item}>
+
+
+    const mapped_items = items.map((item: string, index: number) => {
+        return <li
+            key={index}
+            className= {index === selectedListItem ? 'list-group-item active' : 'list-group-item'}
+            onClick={handleEvent}
+        >
             {item}
         </li>
     })
@@ -49,9 +63,7 @@ function ListGroup(){
     return(
         <>
             {header}
-            <ul className="list-group">
-                {mapped_items}
-            </ul>
+            <ul className="list-group"> {mapped_items}</ul>
         </>
     );
 }
