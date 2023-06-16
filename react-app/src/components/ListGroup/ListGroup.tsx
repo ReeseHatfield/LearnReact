@@ -22,50 +22,66 @@ Cannot iterate with JSX
 import {ReactComponentElement} from "react";
 import { MouseEvent } from "react";
 
-function ListGroup(){
+import { useState } from "react"
 
-    const header = <h1>My List Group</h1>
 
-    const items : string[] =[
-        'Paris',
-        'Tokyo',
-        'Chillicothe',
-        'Fairborn'
-    ]
+interface ListGroupProps{
+    header: string
+    listItems: any
+}
 
-    let selectedListItem = -1
+function ListGroup(props: ListGroupProps){
 
-    if(items.length === 0){
+    //can also destructure props like function ListGroup({ header, listItems }: ListGroupProps)
+    //to just use header and listItems directly
+
+
+
+    const [selectedListItem, setSelectedListItem] = useState(-1)
+
+
+    if(props.listItems.length === 0){
         return (
             <>
-                {header}
+                {props.header}
                 <p>No cities found</p>
             </>
         )
     }
 
-    const handleEvent = (event: MouseEvent) =>{
-        //set selectedListItem to index??
-    }
 
 
-
-    const mapped_items = items.map((item: string, index: number) => {
-        return <li
-            key={index}
-            className= {index === selectedListItem ? 'list-group-item active' : 'list-group-item'}
-            onClick={handleEvent}
-        >
-            {item}
-        </li>
-    })
+    const mapped_items = props.listItems.map((item: string, index: number) => {
+        return (
+            <li
+                key={index}
+                onClick={() => {
+                    // Use the state updating function instead of directly setting the variable
+                    setSelectedListItem(index);
+                }}
+                className={determineClasses(selectedListItem, index)}
+            >
+                {item}
+            </li>
+        );
+    });
 
     return(
         <>
-            {header}
+            {props.header}
             <ul className="list-group"> {mapped_items}</ul>
         </>
     );
+}
+
+function determineClasses(selected: number, index: number): string{
+    let classes: string = 'list-group-item'
+
+    if(selected === index){
+        classes += ' active'
+    }
+
+    return classes
 }
 
 export default ListGroup

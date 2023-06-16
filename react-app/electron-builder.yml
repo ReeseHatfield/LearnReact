@@ -1,0 +1,11 @@
+productName: My Electron App
+appId: com.example.myElectronApp
+directories:
+  output: "dist"
+  buildResources: "assets"
+files:
+  - "!**/*"
+  - "dist/**/*"
+  - "node_modules/**/*"
+  - "electron.js"
+  - "package.json"
