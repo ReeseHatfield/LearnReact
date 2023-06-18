@@ -1,6 +1,7 @@
 import ListGroup from "./components/ListGroup/ListGroup";
 import Button from "./components/Button/Button";
 import PasswordField from "./components/PasswordField/PasswordField";
+import Alert from "./components/Alert/Alert";
 
 function App() {
   const items: string[] = ["Paris", "Tokyo", "Chillicothe", "Fairborn"];
@@ -20,6 +21,9 @@ function App() {
       ></ListGroup>
 
       <Button></Button>
+      <Alert>
+        <div>Hello World</div>
+      </Alert>
       <PasswordField></PasswordField>
     </div>
   );
