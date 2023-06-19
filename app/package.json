@@ -6,7 +6,7 @@
   "homepage": "./",
   "type": "module",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "./node_modules/.bin/electron frontend",
     "dev": "./node_modules/.bin/vite",
     "electron-start": "./node_modules/.bin/concurrently \\\"npm:dev\\\" \\\"npm:start\\\"",
     "build": "./node_modules/.bin/vite build && tsc",
