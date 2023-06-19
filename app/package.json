@@ -2,11 +2,11 @@
   "name": "react-app",
   "private": true,
   "version": "0.0.0",
-  "main": "electron.ts",
+  "main": "electron/electron.ts",
   "homepage": "./",
   "type": "module",
   "scripts": {
-    "start": "electron ./electron.ts",
+    "start": "electron electron/electron.ts",
     "dev": "vite",
     "electron-start": "concurrently \"npm run dev\" \"npm run start\"",
     "build": "vite build && tsc",
