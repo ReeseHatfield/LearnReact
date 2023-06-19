@@ -1,3 +1,5 @@
+import hashValue from "../hashing/hash";
+import {UserAlreadyExistsException} from "./database_errors/UserAlreadyExistsException";
 
 class DataBase {
     private readonly b16PublicKey: string;
@@ -7,21 +9,52 @@ class DataBase {
         this.b16PublicKey = this.generatePublicKey();
         this.userPasswordTable = {};
 
-        console.log(this.b16PublicKey)
     }
 
     private generatePublicKey(): string {
-        const randomHex = Math.floor(Math.random()*16777215).toString(16);
-        return randomHex.toString();
+        let key: string = '';
+
+        for (let i: number = 0; i < 16; i++) {
+            key += Math.floor(Math.random() * 16).toString(16);
+        }
+
+        return key;
     }
 
-    getPublicKey(): string {
+    public addUser(name: string, plainTextPassword: string){
+        if(this.userPasswordTable[name] !== undefined){
+            throw new UserAlreadyExistsException(`Error: ${name} already exists, please choose another username`);
+        }
+
+        const hashedPassword: string = hashValue(plainTextPassword, this.b16PublicKey);
+
+        this.userPasswordTable[name] = hashedPassword
+    }
+
+    public verifyUser(user: string, hashedPassword: string): boolean{
+        return this.userPasswordTable[user] === hashedPassword;
+    }
+
+    public userExists(user: string){
+        return this.userPasswordTable[user] !== undefined;
+    }
+
+    public deleteUser(user: string, hashedPassword: string): boolean{
+        if(this.verifyUser(user, hashedPassword)){
+            delete this.userPasswordTable[user];
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public getPublicKey(): string {
         return this.b16PublicKey;
     }
 
-    addUser(userName: string, password: string): void {
-        this.userPasswordTable[userName] = password;
-    }
 }
 
 let db: DataBase = new DataBase();
+db.addUser('Admin', 'password');
+db.addUser('Roger','bunnies');
