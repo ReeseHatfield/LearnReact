@@ -6,12 +6,12 @@
   "homepage": "./",
   "type": "module",
   "scripts": {
-    "start": "./node_modules/.bin/electron frontend",
-    "dev": "./node_modules/.bin/vite",
-    "electron-start": "./node_modules/.bin/concurrently \\\"npm:dev\\\" \\\"npm:start\\\"",
-    "build": "./node_modules/.bin/vite build && tsc",
-    "electron-build": "./node_modules/.bin/electron-builder",
-    "postinstall": "./node_modules/.bin/electron-builder install-app-deps"
+    "start": "electron ./electron.ts",
+    "dev": "vite",
+    "electron-start": "concurrently \"npm run dev\" \"npm run start\"",
+    "build": "vite build && tsc",
+    "electron-build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "bootstrap": "^5.3.0",
