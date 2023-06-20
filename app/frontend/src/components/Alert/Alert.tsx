@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
 
 //rsf
+
+import {ReactNode} from "react";
 
 interface props {
   children: ReactNode;

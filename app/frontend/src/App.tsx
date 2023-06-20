@@ -1,32 +1,24 @@
-import ListGroup from "./components/ListGroup/ListGroup";
-import Button from "./components/Button/Button";
-import PasswordField from "./components/PasswordField/PasswordField";
-import Alert from "./components/Alert/Alert";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from "./pages/LoginPage/LoginPage";
+import PointOfSale from "./pages/PointOfSale";
+import './App.css';
 
 function App() {
-  const items: string[] = ["Paris", "Tokyo", "Chillicothe", "Fairborn"];
-
-  const header: string = "Cities";
-
-  const handleSelectItemEvent = (item: string) => {
-    alert(item);
-  };
-
-  return (
-    <div>
-      <ListGroup
-        header={header}
-        listItems={items}
-        onSelectItem={handleSelectItemEvent}
-      ></ListGroup>
-
-      <Button></Button>
-      <Alert>
-        <div>Hello World</div>
-      </Alert>
-      <PasswordField></PasswordField>
-    </div>
-  );
+    const videoSource: string = `${window.location.href}/background.mp4`;
+    return (
+        <div className='App'>
+            <video autoPlay loop muted className='backgroundVideo'>
+                <source src={videoSource} type='video/mp4' />
+            </video>
+            <Router>
+                <Routes>
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path='pos' element={<PointOfSale />} />
+                    <Route path='*' element={<LoginPage />} />
+                </Routes>
+            </Router>
+        </div>
+    )
 }
 
 export default App;

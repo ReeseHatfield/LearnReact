@@ -3,7 +3,7 @@ import {UserAlreadyExistsException} from "./database_errors/UserAlreadyExistsExc
 import * as fs from "fs";
 import * as path from 'path';
 
-class DataBase {
+export class DataBase {
     private readonly b16PublicKey: string;
     private userPasswordTable: { [userName: string]: string; };
 
