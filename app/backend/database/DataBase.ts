@@ -1,5 +1,7 @@
 import hashValue from "../hashing/hash";
 import {UserAlreadyExistsException} from "./database_errors/UserAlreadyExistsException";
+import * as fs from "fs";
+import * as path from 'path';
 
 class DataBase {
     private readonly b16PublicKey: string;
@@ -7,18 +9,39 @@ class DataBase {
 
     constructor() {
         this.b16PublicKey = this.generatePublicKey();
-        this.userPasswordTable = {};
+        this.userPasswordTable = this.readUserPasswordFile();
 
+        this.createDefaultAdministratorAccount();
+    }
+
+    private readUserPasswordFile(): {[userName: string]: string}{
+        try {
+            let usersFilePath: string = path.resolve(__dirname, 'userPasswordFile.json');
+            if(fs.existsSync(usersFilePath)) {
+                let usersJSON: string = fs.readFileSync(usersFilePath, "utf-8");
+                return JSON.parse(usersJSON);
+            } else {
+                console.error(`Error: ${usersFilePath} not found`);
+                return {};
+            }
+        } catch (error) {
+            console.error(`Error reading user password file: ${error}`);
+            return {};
+        }
+    }
+
+    private createDefaultAdministratorAccount(): void{
+        if(this.userPasswordTable['Admin'] !== undefined) return;
+
+        const name: string = 'Admin';
+        const defaultAdminPassword: string = 'Admin'; // this is insecure
+
+        this.addUser(name, defaultAdminPassword);
     }
 
     private generatePublicKey(): string {
-        let key: string = '';
-
-        for (let i: number = 0; i < 16; i++) {
-            key += Math.floor(Math.random() * 16).toString(16);
-        }
-
-        return key;
+        return '67D3D0797982EF10';
+        //final public key
     }
 
     public addUser(name: string, plainTextPassword: string){
@@ -26,12 +49,27 @@ class DataBase {
             throw new UserAlreadyExistsException(`Error: ${name} already exists, please choose another username`);
         }
 
+        let usersFilePath = path.resolve(__dirname, 'userPasswordFile.json');
+        let usersJSON: string = fs.existsSync(usersFilePath) ? fs.readFileSync(usersFilePath, "utf-8") : "{}";
+        let users = JSON.parse(usersJSON);
+
         const hashedPassword: string = hashValue(plainTextPassword, this.b16PublicKey);
 
-        this.userPasswordTable[name] = hashedPassword
+        users[name] = hashedPassword;
+
+        usersJSON = JSON.stringify(users);
+
+        try {
+            fs.writeFileSync(usersFilePath, usersJSON, "utf-8");
+        } catch (error) {
+            console.error(`Error writing user password file: ${error}`);
+        }
+
+        this.userPasswordTable[name] = hashedPassword;
     }
 
-    public verifyUser(user: string, hashedPassword: string): boolean{
+    public verifyUser(user: string, plainTextPassword: string): boolean{
+        const hashedPassword: string = hashValue(plainTextPassword, this.getPublicKey());
         return this.userPasswordTable[user] === hashedPassword;
     }
 
@@ -42,9 +80,23 @@ class DataBase {
     public deleteUser(user: string, hashedPassword: string): boolean{
         if(this.verifyUser(user, hashedPassword)){
             delete this.userPasswordTable[user];
+
+            let usersFilePath: string = path.resolve(__dirname, 'userPasswordFile.json');
+            let usersJSON: string = fs.existsSync(usersFilePath) ? fs.readFileSync(usersFilePath, "utf-8") : "{}";
+            let users = JSON.parse(usersJSON);
+
+            delete users[user];
+
+            usersJSON = JSON.stringify(users);
+
+            try {
+                fs.writeFileSync(usersFilePath, usersJSON, "utf-8");
+            } catch (error) {
+                console.error(`Error writing user password file: ${error}`);
+            }
+
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -52,9 +104,7 @@ class DataBase {
     public getPublicKey(): string {
         return this.b16PublicKey;
     }
-
 }
 
 let db: DataBase = new DataBase();
-db.addUser('Admin', 'password');
-db.addUser('Roger','bunnies');
+db.addUser('Roger', 'rogerIsKINGGG');
