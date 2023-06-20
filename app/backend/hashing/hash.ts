@@ -26,7 +26,6 @@ function encodeStringToHex(s: string): string {
 
 
 function mergeKeys(publicKey: string, privateKey: string): string{
-    //todo
 
     const isEven = (n: number) => n % 2 == 0
 
