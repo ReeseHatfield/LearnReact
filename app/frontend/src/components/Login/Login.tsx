@@ -4,7 +4,7 @@ import { DataBase } from "../../../../backend/database/DataBase";
 
 function Login(){
 
-    let db: DataBase = new DataBase;
+    //let db: DataBase = new DataBase;
 
     return (
         <div className="login-container">

@@ -1,6 +1,6 @@
 import hashValue from "../hashing/hash";
 import {UserAlreadyExistsException} from "./database_errors/UserAlreadyExistsException";
-import * as fs from "fs";
+import * as fs from 'fs'
 import * as path from 'path';
 
 export class DataBase {
@@ -16,7 +16,7 @@ export class DataBase {
 
     private readUserPasswordFile(): {[userName: string]: string}{
         try {
-            let usersFilePath: string = path.resolve(__dirname, 'userPasswordFile.json');
+            let usersFilePath: string = './userPasswordFile.json';
             if(fs.existsSync(usersFilePath)) {
                 let usersJSON: string = fs.readFileSync(usersFilePath, "utf-8");
                 return JSON.parse(usersJSON);
@@ -49,7 +49,7 @@ export class DataBase {
             throw new UserAlreadyExistsException(`Error: ${name} already exists, please choose another username`);
         }
 
-        let usersFilePath = path.resolve(__dirname, 'userPasswordFile.json');
+        let usersFilePath: string = './userPasswordFile.json';
         let usersJSON: string = fs.existsSync(usersFilePath) ? fs.readFileSync(usersFilePath, "utf-8") : "{}";
         let users = JSON.parse(usersJSON);
 

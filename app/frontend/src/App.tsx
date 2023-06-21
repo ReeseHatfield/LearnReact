@@ -5,6 +5,7 @@ import './App.css';
 
 function App() {
     const videoSource: string = `${window.location.href}/background.mp4`;
+
     return (
         <div className='App'>
             <video autoPlay loop muted className='backgroundVideo'>
