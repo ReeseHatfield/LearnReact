@@ -15,8 +15,8 @@ export default function hashValue(toHash: string, publicKey: string){
 
 
 function encodeStringToHex(s: string): string {
-    let hex = '';
-    for (let i = 0; i < s.length; i++) {
+    let hex: string = '';
+    for (let i: number = 0; i < s.length; i++) {
         hex += s.charCodeAt(i).toString(16);
     }
     // truncate or pad string to 16 characters
