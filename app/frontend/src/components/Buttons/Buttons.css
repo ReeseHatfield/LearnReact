@@ -1,10 +1,10 @@
 
 
-.log-out-btn {
+.util-btn {
     background-color: #0b5ed7;
     border: 5px;
     color: #0f5132;
-    padding: 15px 32px;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -12,9 +12,12 @@
     margin: 4px 2px;
     cursor: pointer;
     transition-duration: 0.4s;
+    position: relative;
+    height: 60px;
+    width: 130px;
 }
 
-.log-out-btn:hover {
+.util-btn:hover {
     background-color: #0a53be;
     color: white;
     border: 2px solid #4CAF50;

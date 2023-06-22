@@ -1,5 +1,5 @@
 .pos-container{
-    width: 575px;
+    width: 700px;
     height: 475px;
     padding: 10px;
     color: #6f42c1;
@@ -12,7 +12,12 @@
     vertical-align: center;
 }
 .util{
-
+    background-color: #0a3622;
+    /*Temporary bg color*/
+    width: 400px;
+    height: 400px;
+    position: relative;
+    padding: 10px 10px;
 }
 
 .sales-item-container{

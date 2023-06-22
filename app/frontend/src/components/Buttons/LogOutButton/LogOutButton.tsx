@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './LogOutButton.css'
+import '../Buttons.css'
 
 interface LogOutProps{
     onLogOut: () => void
@@ -9,7 +9,11 @@ function LogOutButton({onLogOut}: LogOutProps) {
 
     return (
         <div>
-            <button type='button' className='log-out-btn' onClick={onLogOut}></button>
+            <button
+                type='button'
+                className='util-btn'
+                onClick={onLogOut}
+            >Log Out</button>
         </div>
     );
 }

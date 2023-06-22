@@ -1,34 +1,47 @@
 import * as React from 'react';
 import SaleItem from "../../components/SaleItem/SaleItem";
 import './PointOfSale.css'
-import LogOutButton from "../../components/LogOutButton/LogOutButton";
+import LogOutButton from "../../components/Buttons/LogOutButton/LogOutButton";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import CheckoutButton from "../../components/Buttons/CheckoutButton/CheckoutButton";
+import ExportButton from "../../components/Buttons/ExportButton/ExportButton";
 
 interface PointOfSalePageProps{
     isUser: boolean
 }
 
 function PointOfSale({ isUser }: PointOfSalePageProps) {
-    let isLoggedIn: boolean = false;
 
-    isLoggedIn = isUser;
-
+    let isLoggedIn: boolean = isUser
     const handleLogOut = (): void =>{
+        /*
+        If user has not been verified by server, send them back to login page. This would
+        occur if a user found a way to directly navigate to the /pos page
+        from the electron app. Not entirely sure if this is possible, but feels like
+        good security practice regardless
+        */
         navigate('/login')
     }
+    if(!isLoggedIn) return userNotLoggedIn(handleLogOut);
 
-    if(!isLoggedIn){
-        return userNotLoggedIn(handleLogOut);
-    }
 
     const navigate: NavigateFunction = useNavigate();
 
-    const [currentOrder, setCurrentOrder] = useState([])
+    const [cart, setCart] = useState([])
 
     const handleAddItem = (name: string, price: number): void =>{
-        console.log(`name: ${name}`);
-        console.log(`price: ${price}`);
+        appendToCart({name, price});
+
+    }
+
+
+    const appendToCart = (newItem) => {
+        let currentCart = cart;
+        currentCart.push(newItem);
+        setCart(currentCart);
+
+        console.log(cart)
     }
 
 
@@ -42,6 +55,8 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
                 <div className='util'>
                     <LogOutButton onLogOut={handleLogOut}/>
+                    <CheckoutButton />
+                    <ExportButton />
                 </div>
 
             </div>
@@ -95,5 +110,6 @@ function userNotLoggedIn(handleLogOutFunc: () => void){
         </>
     )
 }
+
 
 export default PointOfSale;
