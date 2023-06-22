@@ -13,7 +13,10 @@ function SaleItem({name, price}: SaleItemProps) {
                 type="button"
                 className="btn"
             >
-                {name} {price}
+                <div>
+                    {name} {price.toFixed(2)}
+                </div>
+
             </button>
 
         </>
