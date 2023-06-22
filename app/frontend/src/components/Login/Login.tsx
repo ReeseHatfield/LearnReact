@@ -23,7 +23,7 @@ function Login({ onLogin }: LoginProps) {
 
         console.log("handling click event");
         if(username === 'Admin' && password === 'Admin'){
-            alert("Logged in");
+            //alert("Logged in");
             onLogin(username, password);
         }
     }

@@ -14,7 +14,7 @@ function LoginPage() {
     }
 
     return (
-        <div className='LoginPage'>
+        <div className='login-page'>
             <Login onLogin={handleLogin}></Login>
         </div>
     );
