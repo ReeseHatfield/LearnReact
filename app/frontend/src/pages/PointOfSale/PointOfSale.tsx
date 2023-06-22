@@ -13,26 +13,13 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
     isLoggedIn = isUser;
 
-
-    const handleLogOut = () =>{
+    const handleLogOut = (): void =>{
         console.log("LOG OUT")
         navigate('/login')
     }
 
     if(!isLoggedIn){
-        return (
-            <>
-                <div>
-                    <h1>
-                        Please exit and sign in
-                    </h1>
-
-                    <LogOutButton onLogOut={handleLogOut}/>
-                </div>
-
-
-            </>
-        )
+        return userNotLoggedIn(handleLogOut);
     }
 
     const navigate: NavigateFunction = useNavigate();
@@ -57,6 +44,20 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
 
     );
+}
+
+function userNotLoggedIn(handleLogOutFunc: () => void){
+    return (
+        <>
+            <div>
+                <h1>
+                    Please exit and sign in
+                </h1>
+
+                <LogOutButton onLogOut={handleLogOutFunc}/>
+            </div>
+        </>
+    )
 }
 
 export default PointOfSale;
