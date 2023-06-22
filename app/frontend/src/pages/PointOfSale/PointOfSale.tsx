@@ -4,14 +4,39 @@ import './PointOfSale.css'
 import LogOutButton from "../../components/LogOutButton/LogOutButton";
 import {NavigateFunction, useNavigate} from "react-router-dom";
 
-function PointOfSale() {
+interface PointOfSalePageProps{
+    isUser: boolean
+}
 
-    const navigate: NavigateFunction = useNavigate();
+function PointOfSale({ isUser }: PointOfSalePageProps) {
+    let isLoggedIn: boolean = false;
+
+    isLoggedIn = isUser;
+
 
     const handleLogOut = () =>{
         console.log("LOG OUT")
         navigate('/login')
     }
+
+    if(!isLoggedIn){
+        return (
+            <>
+                <div>
+                    <h1>
+                        Please exit and sign in
+                    </h1>
+
+                    <LogOutButton onLogOut={handleLogOut}/>
+                </div>
+
+
+            </>
+        )
+    }
+
+    const navigate: NavigateFunction = useNavigate();
+
 
     return (
         <>

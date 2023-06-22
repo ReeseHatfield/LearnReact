@@ -14,7 +14,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path='/login' element={<LoginPage />} />
-                    <Route path='/pos' element={<PointOfSale />} />
+                    <Route path='/pos' element={<PointOfSale isUser={true} />} />
                     <Route path='*' element={<LoginPage />} />
                 </Routes>
             </Router>
