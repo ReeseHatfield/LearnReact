@@ -1,10 +1,11 @@
-import hashValue from "../hashing/hash";
-import {UserAlreadyExistsException} from "./database_errors/UserAlreadyExistsException";
-import * as fs from 'fs'
-import * as path from 'path';
+const hashValue = require("../hashing/hash");
+const UserAlreadyExistsException = require("./database_errors/UserAlreadyExistsException");
+const fs = require('fs');
+const path = require('path');
 
-export class DataBase {
-    private readonly b16PublicKey: string;
+
+export default class DataBase {
+    private b16PublicKey: string;
     private userPasswordTable: { [userName: string]: string; };
 
     constructor() {
@@ -106,5 +107,4 @@ export class DataBase {
     }
 }
 
-let db: DataBase = new DataBase();
-db.addUser('Roger', 'rogerIsKINGGG');
+module.exports = DataBase;

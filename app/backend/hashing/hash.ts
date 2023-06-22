@@ -89,5 +89,7 @@ function circularShiftNBits(hashToShift: string, numBitsToShift: number): string
     return hashToShift.substring(numBitsToShift) + hashToShift.substring(0, numBitsToShift);
 }
 
+module.exports = hashValue
+
 
 
