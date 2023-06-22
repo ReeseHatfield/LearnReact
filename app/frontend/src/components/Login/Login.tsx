@@ -2,9 +2,11 @@ import './Login.css'
 import * as React from "react";
 import { useState } from "react";
 
-interface LoginProps {}
+interface LoginProps {
+    onLogin: (username: string, password: string) => void;
+}
 
-function Login() {
+function Login({ onLogin }: LoginProps) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,6 +24,7 @@ function Login() {
         console.log("handling click event");
         if(username === 'Admin' && password === 'Admin'){
             alert("Logged in");
+            onLogin(username, password);
         }
     }
 
