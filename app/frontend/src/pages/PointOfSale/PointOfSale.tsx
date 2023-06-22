@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SaleItem from "../components/SaleItem/SaleItem";
+import SaleItem from "../../components/SaleItem/SaleItem";
 
 function PointOfSale() {
     return (
