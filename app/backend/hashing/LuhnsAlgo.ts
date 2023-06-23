@@ -1,7 +1,7 @@
 /*
   -------Luhn's Algorithm---------
   Luhn's algorithm is a checksum algorithm used for number verification
-  Often used with validating credit card numbers
+  Often used with validating credit card numbers and other things
     1. convert string to num arr
     2. Weight each int, starting from the right, alternating =* 1 or *= 2
     3. For each digit greater than 9, subtract 9
