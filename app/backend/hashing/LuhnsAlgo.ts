@@ -1,29 +1,29 @@
-export default function luhnsCheck(creditCardNum: string): boolean{
-    console.log(`creditCardNum: ${creditCardNum}`)
-    const cardNumber: string[] = creditCardNum.split('')
-    let digits: number[] = [];
+export default function luhnsCheck(creditCardNum: string): boolean {
+  console.log(`creditCardNum: ${creditCardNum}`);
+  const cardNumber: string[] = creditCardNum.split("").reverse();
+  let digits: number[] = [];
 
-    cardNumber.map((item: string) =>{
-        digits.push(parseInt(item))
-    })
+  cardNumber.forEach((item: string) => {
+    digits.push(parseInt(item));
+  });
 
+  const digitalRoot = (n: number) => {
+    return ((n - 1) % 9) + 1;
+  };
 
-    const digitalRoot = (n: number) =>{
-        return (n - 1) % 9 + 1;
-        //O(1) digital root is crazy
+  digits = digits.map((currentElement: number, index: number) => {
+    if (index % 2 != 0) {
+      currentElement *= 2;
+      if (currentElement > 9) {
+        currentElement -= 9; // subtract 9 if digit is greater than 9
+      }
     }
+    return currentElement;
+  });
 
-    digits.map((currentElement: number, index: number) => {
-        let weight: number = 1
-        if(index % 2 == 0){
-            weight = 2
-        }
+  const sum = digits.reduce((a, b) => a + b, 0);
 
-        currentElement *= weight
-        currentElement = digitalRoot(currentElement);
-    })
+  console.log(`sum: ${sum}`);
 
-    const sum = digits.reduce((a, b) => a + b, 0);
-
-    return sum % 10 == 0;
+  return sum % 10 == 0;
 }
