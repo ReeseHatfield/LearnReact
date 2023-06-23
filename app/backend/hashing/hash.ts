@@ -49,8 +49,6 @@ function mergeKeys(publicKey: string, privateKey: string): string{
 
     const finalHash: string = circularShiftNBits(mergedKeys, parseInt(mergedKeys.charAt(0)))
 
-    console.log(finalHash)
-
     return finalHash
 
 }

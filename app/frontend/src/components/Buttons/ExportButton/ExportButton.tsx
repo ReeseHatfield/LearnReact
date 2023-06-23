@@ -7,7 +7,7 @@ function ExportButton() {
                 type='button'
                 className='util-btn'
             >
-                Checkout
+                Export Data
             </button>
         </div>
     );

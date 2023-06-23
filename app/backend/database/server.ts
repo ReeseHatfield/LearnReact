@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import luhnsCheck from "../hashing/LuhnsAlgo";
 const express = require('express');
 const cors = require('cors');
 const DataBase = require('./DataBase.ts');
@@ -18,6 +19,20 @@ app.post('/addUser', (req: Request, res: Response) => {
         res.status(200).send('User added successfully');
     } catch (error: any) {
         res.status(500).send(error.message);
+    }
+});
+
+
+app.post('/checkout', (req: Request, res: Response) =>{
+    const { creditCardNum } = req.body;
+
+    const checkResult: boolean = luhnsCheck(creditCardNum);
+
+    if(checkResult){
+        res.status(200).send('Card Verified');
+    }
+    else {
+        res.status(401).send('Incorrect Card Number');
     }
 });
 

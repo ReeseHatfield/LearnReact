@@ -32,18 +32,39 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
     const handleAddItem = (name: string, price: number): void =>{
         appendToCart({name, price});
-
     }
 
 
-    const appendToCart = (newItem) => {
+    const handleCheckout =  async () =>{
+        let total: number = 0;
+        cart.map((item) => {
+            total += item.price;
+        })
+
+        setCart([])
+
+        const creditCardNum: string = "4532013266207389";
+
+        const response: Response = await fetch('http://localhost:3001/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ creditCardNum: creditCardNum }),
+        });
+
+        if (response.ok) {
+            alert('CARD WENT THRU')
+        } else {
+            alert('NO CARD :(');
+        }
+    }
+
+    const appendToCart = async (newItem) => {
         let currentCart = cart;
         currentCart.push(newItem);
         setCart(currentCart);
-
-        console.log(cart)
     }
-
 
     return (
         <>
@@ -55,13 +76,11 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
                 <div className='util'>
                     <LogOutButton onLogOut={handleLogOut}/>
-                    <CheckoutButton />
+                    <CheckoutButton handleCheckout={handleCheckout}/>
                     <ExportButton />
                 </div>
-
             </div>
         </>
-
 
     );
 }
