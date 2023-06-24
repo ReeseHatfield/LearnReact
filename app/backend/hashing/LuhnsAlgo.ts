@@ -26,7 +26,8 @@ export default function luhnsCheck(creditCardNum: string): boolean {
     if (index % 2 != 0) {
       currentElement *= 2;
       if (currentElement > 9) {
-        currentElement -= 9; // subtract 9 if digit is greater than 9
+        currentElement -= 9;
+        // subtract 9 if digit is greater than 9
       }
     }
     return currentElement;
