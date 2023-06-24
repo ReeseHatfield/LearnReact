@@ -23,3 +23,18 @@
 .sales-item-container{
     display: grid;
 }
+.text-area{
+    height: 175px;
+    width: 130px;
+    overflow: auto;
+    background-color: white;
+    border: 5px;
+    color: #0f5132;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    position: relative;
+}

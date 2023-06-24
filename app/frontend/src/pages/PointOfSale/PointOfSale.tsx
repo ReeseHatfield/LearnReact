@@ -12,26 +12,17 @@ interface PointOfSalePageProps {
 }
 
 function PointOfSale({ isUser }: PointOfSalePageProps) {
+  const navigate: NavigateFunction = useNavigate();
   let isLoggedIn: boolean = isUser;
   const handleLogOut = (): void => {
-    /*
-        If user has not been verified by server, send them back to login page. This would
-        occur if a user found a way to directly navigate to the /pos page
-        from the electron app. Not entirely sure if this is possible, but feels like
-        good security practice regardless
-        */
     navigate("/login");
   };
   if (!isLoggedIn) return userNotLoggedIn(handleLogOut);
-
-  const navigate: NavigateFunction = useNavigate();
 
   const [cart, setCart] = useState([]);
 
   const handleAddItem = (name: string, price: number): void => {
     appendToCart({ name, price });
-    //promise returned is ignored
-    //function modifies component state
   };
 
   const handleCheckout = async () => {
@@ -40,10 +31,18 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
   };
 
   const appendToCart = async (newItem) => {
-    let currentCart = cart;
-    currentCart.push(newItem);
-    setCart(currentCart);
+    setCart((currentCart) => [...currentCart, newItem]);
   };
+
+  const mappedItems: React.JSX.Element[] = cart.map(
+    (item: { name: string; price: number }, index: number) => {
+      return (
+        <li key={index}>
+          {item.name}: {item.price}
+        </li>
+      );
+    }
+  );
 
   return (
     <>
@@ -56,6 +55,9 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
           <LogOutButton onLogOut={handleLogOut} />
           <CheckoutButton handleCheckout={handleCheckout} />
           <ExportButton />
+          <div className="text-area">
+            <ul>{mappedItems}</ul>
+          </div>
         </div>
       </div>
     </>
