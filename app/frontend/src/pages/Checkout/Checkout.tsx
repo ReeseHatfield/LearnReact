@@ -46,13 +46,22 @@ function Checkout() {
   return (
     <div className="checkout">
       <h1>Total {total} </h1>
+      <textarea readOnly={true}></textarea>
+      {/*todo: put in all sale items*/}
+
+      <label>Please scan card: </label>
       <input onChange={handleCardChange} />
-      <button onClick={finalizeCheckout} />
-      <button
-        onClick={() => {
-          navigate("/pos");
-        }}
-      />
+
+      <div>
+        <button onClick={finalizeCheckout}>Purchase</button>
+        <button
+          onClick={(): void => {
+            navigate("/pos");
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
