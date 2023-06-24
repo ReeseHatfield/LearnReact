@@ -32,8 +32,6 @@ function Checkout() {
     }
   };
 
-  // const total = cart.reduce((acc, item.price) => acc + item, 0);
-
   const handleCardChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -41,42 +39,22 @@ function Checkout() {
   };
 
   let total: number = 0;
-
-  Array.from(cart.values).forEach((item: number, index: number) => {
-    console.log(item);
-    total += item;
+  cart.forEach((item): void => {
+    total += item.price;
   });
 
   return (
     <div className="checkout">
-      <h1>Total {JSON.stringify(cart)} </h1>
+      <h1>Total {total} </h1>
       <input onChange={handleCardChange} />
       <button onClick={finalizeCheckout} />
+      <button
+        onClick={() => {
+          navigate("/pos");
+        }}
+      />
     </div>
   );
 }
 
 export default Checkout;
-
-// let total: number = 0;
-// cart.map((item) => {
-//   total += item.price;
-// });
-//
-// setCart([]);
-//
-// const creditCardNum: string = "79927398713";
-//
-// const response: Response = await fetch("http://localhost:3001/checkout", {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({ creditCardNum: creditCardNum }),
-// });
-//
-// if (response.ok) {
-//   alert("CARD WENT THRU");
-// } else {
-//   alert("NO CARD :(");
-// }
