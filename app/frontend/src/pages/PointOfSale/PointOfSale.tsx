@@ -35,6 +35,7 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
   };
 
   const handleCheckout = async () => {
+    setCart([]);
     navigate("/checkout", { state: cart });
   };
 
