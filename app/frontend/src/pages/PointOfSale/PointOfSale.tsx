@@ -30,31 +30,12 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 
   const handleAddItem = (name: string, price: number): void => {
     appendToCart({ name, price });
+    //promise returned is ignored
+    //function modifies component state
   };
 
   const handleCheckout = async () => {
-    let total: number = 0;
-    cart.map((item) => {
-      total += item.price;
-    });
-
-    setCart([]);
-
-    const creditCardNum: string = "79927398713";
-
-    const response: Response = await fetch("http://localhost:3001/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ creditCardNum: creditCardNum }),
-    });
-
-    if (response.ok) {
-      alert("CARD WENT THRU");
-    } else {
-      alert("NO CARD :(");
-    }
+    navigate("/checkout", { state: cart });
   };
 
   const appendToCart = async (newItem) => {
