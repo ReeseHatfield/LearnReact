@@ -2,6 +2,7 @@ import * as React from "react";
 import "./Checkout.css";
 import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CartText from "../../components/CartText/CartText";
 
 function Checkout() {
   const { state } = useLocation();
@@ -46,8 +47,7 @@ function Checkout() {
   return (
     <div className="checkout">
       <h1>Total {total} </h1>
-      <textarea readOnly={true}></textarea>
-      {/*todo: put in all sale items*/}
+      <CartText cart={cart} />
 
       <label>Please scan card: </label>
       <input onChange={handleCardChange} />
