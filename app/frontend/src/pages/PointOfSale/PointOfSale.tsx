@@ -6,6 +6,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CheckoutButton from "../../components/Buttons/CheckoutButton/CheckoutButton";
 import ExportButton from "../../components/Buttons/ExportButton/ExportButton";
+import CartText from "../../components/CartText/CartText.js";
 
 interface PointOfSalePageProps {
   isUser: boolean;
@@ -34,16 +35,6 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
     setCart((currentCart) => [...currentCart, newItem]);
   };
 
-  const mappedItems: React.JSX.Element[] = cart.map(
-    (item: { name: string; price: number }, index: number) => {
-      return (
-        <li key={index}>
-          {item.name}: {item.price}
-        </li>
-      );
-    }
-  );
-
   return (
     <>
       <div className="pos-container">
@@ -55,9 +46,7 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
           <LogOutButton onLogOut={handleLogOut} />
           <CheckoutButton handleCheckout={handleCheckout} />
           <ExportButton />
-          <div className="text-area">
-            <ul>{mappedItems}</ul>
-          </div>
+          <CartText cart={cart} />
         </div>
       </div>
     </>
