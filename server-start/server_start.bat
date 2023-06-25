@@ -1,0 +1,3 @@
+echo Starting server...
+cd ../app/backend/database
+ts-node server.ts
