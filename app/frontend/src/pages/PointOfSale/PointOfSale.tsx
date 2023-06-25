@@ -14,16 +14,16 @@ interface PointOfSalePageProps {
 
 function PointOfSale({ isUser }: PointOfSalePageProps) {
   const navigate: NavigateFunction = useNavigate();
-  let isLoggedIn: boolean = isUser;
   const handleLogOut = (): void => {
     navigate("/login");
   };
-  if (!isLoggedIn) return userNotLoggedIn(handleLogOut);
+  if (!isUser) return userNotLoggedIn(handleLogOut);
 
   const [cart, setCart] = useState([]);
 
   const handleAddItem = (name: string, price: number): void => {
     appendToCart({ name, price });
+    //promise ignored, state hook updated
   };
 
   const handleCheckout = async () => {
@@ -66,7 +66,7 @@ function initializePOSItems(
     { name: "Pizza", price: 8.5 },
     { name: "Soda", price: 1.75 },
     { name: "Ice Cream", price: 4.5 },
-    { name: "Tea", price: 2.5 },
+    { name: "Tea ", price: 2.5 },
     { name: "Cake", price: 4.0 },
     { name: "Fruit", price: 1.0 },
     { name: "Bagel", price: 1.5 },
