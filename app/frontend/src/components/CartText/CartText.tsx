@@ -2,7 +2,7 @@ import * as React from "react";
 import "./CartText.css";
 
 interface CartTextProps {
-  cart: { name: string; price: number };
+  cart: any[];
 }
 
 function CartText({ cart }: CartTextProps) {
