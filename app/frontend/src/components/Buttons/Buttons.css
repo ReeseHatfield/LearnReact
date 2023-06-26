@@ -1,9 +1,10 @@
 .util-btn {
     background-color: #0b5ed7;
     border: 5px;
-    color: #0f5132;
+    color: white;
     padding: 5px 20px;
     text-align: center;
+    font-weight: bold;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;

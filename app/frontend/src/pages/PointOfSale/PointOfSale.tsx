@@ -17,6 +17,7 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
   const handleLogOut = (): void => {
     navigate("/login");
   };
+
   if (!isUser) return userNotLoggedIn(handleLogOut);
 
   const [cart, setCart] = useState([]);

@@ -9,8 +9,9 @@ function CartText({ cart }: CartTextProps) {
   const mappedItems: React.JSX.Element[] = cart.map(
     (item: { name: string; price: number }, index: number) => {
       return (
-        <li key={index}>
-          {item.name}: {item.price}
+        <li className="cart-item" key={index}>
+          <span className="item-name">{item.name}</span>{" "}
+          <span className="item-price">${item.price}</span>
         </li>
       );
     }
@@ -18,7 +19,7 @@ function CartText({ cart }: CartTextProps) {
 
   return (
     <div className="text-area">
-      <ul>{mappedItems}</ul>
+      <ul className="cart-list">{mappedItems}</ul>
     </div>
   );
 }
