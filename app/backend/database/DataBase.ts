@@ -16,7 +16,7 @@ export default class DataBase {
 
   private readUserPasswordFile(): { [userName: string]: string } {
     try {
-      let usersFilePath: string = "./userPasswordFile.json";
+      let usersFilePath: string = "./data/users.json";
       if (fs.existsSync(usersFilePath)) {
         let usersJSON: string = fs.readFileSync(usersFilePath, "utf-8");
         return JSON.parse(usersJSON);
@@ -44,6 +44,29 @@ export default class DataBase {
     //final public key
   }
 
+  public recordTransaction(data: { name: string; price: number }): boolean {
+    let transactionFilePath: string = "./data/transactions.json";
+    try {
+      if (fs.existsSync(transactionFilePath)) {
+        let jsonData = fs.readFileSync(transactionFilePath, "utf-8");
+        let transactions = JSON.parse(jsonData);
+        let arr: { name: string; price: number }[] = Array.from(transactions);
+        arr.push(data);
+
+        jsonData = JSON.stringify(arr);
+        fs.writeFileSync(transactionFilePath, jsonData, "utf-8");
+
+        return true;
+      } else {
+        console.error(`Error: ${transactionFilePath} not found`);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error reading transaction history file");
+      return false;
+    }
+  }
+
   public addUser(name: string, plainTextPassword: string) {
     if (this.userPasswordTable[name] !== undefined) {
       throw new UserAlreadyExistsException(
@@ -51,7 +74,7 @@ export default class DataBase {
       );
     }
 
-    let usersFilePath: string = "./userPasswordFile.json";
+    let usersFilePath: string = "./users.json";
     let usersJSON: string = fs.existsSync(usersFilePath)
       ? fs.readFileSync(usersFilePath, "utf-8")
       : "{}";
@@ -91,10 +114,7 @@ export default class DataBase {
     if (this.verifyUser(user, hashedPassword)) {
       delete this.userPasswordTable[user];
 
-      let usersFilePath: string = path.resolve(
-        __dirname,
-        "userPasswordFile.json"
-      );
+      let usersFilePath: string = path.resolve(__dirname, "users.json");
       let usersJSON: string = fs.existsSync(usersFilePath)
         ? fs.readFileSync(usersFilePath, "utf-8")
         : "{}";

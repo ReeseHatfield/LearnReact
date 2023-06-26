@@ -9884,7 +9884,7 @@ class jc {
   }
   readUserPasswordFile() {
     try {
-      let t = (void 0)(__dirname, "userPasswordFile.json");
+      let t = (void 0)(__dirname, "users.json");
       if (!(void 0)(t)) return console.error(`Error: ${t} not found`), {};
     } catch (t) {
       return console.error(`Error reading user password file: ${t}`), {};
@@ -9904,7 +9904,7 @@ class jc {
       throw new oh(
         `Error: ${t} already exists, please choose another username`
       );
-    let r = (void 0)(__dirname, "userPasswordFile.json"),
+    let r = (void 0)(__dirname, "users.json"),
       l = (void 0)(r) ? (void 0)(r, "utf-8") : "{}",
       o = JSON.parse(l);
     const i = hs(n, this.b16PublicKey);
@@ -9926,7 +9926,7 @@ class jc {
   deleteUser(t, n) {
     if (this.verifyUser(t, n)) {
       delete this.userPasswordTable[t];
-      let r = (void 0)(__dirname, "userPasswordFile.json"),
+      let r = (void 0)(__dirname, "users.json"),
         l = (void 0)(r) ? (void 0)(r, "utf-8") : "{}",
         o = JSON.parse(l);
       delete o[t], (l = JSON.stringify(o));
