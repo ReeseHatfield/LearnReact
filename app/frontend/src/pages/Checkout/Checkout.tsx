@@ -2,7 +2,7 @@ import * as React from "react";
 import "./Checkout.css";
 import { NavigateFunction, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CartText from "../../components/CartText/CartText";
+import CheckoutCart from "../../components/CheckoutCart/CheckoutCart";
 
 function Checkout() {
   const { state } = useLocation();
@@ -27,6 +27,7 @@ function Checkout() {
 
     if (response.ok) {
       alert("CARD WENT THRU");
+      await recordTransaction(cart);
       navigate("/pos");
     } else {
       alert("NO CARD :(");
@@ -47,7 +48,9 @@ function Checkout() {
   return (
     <div className="checkout">
       <h1>Total {total} </h1>
-      <CartText cart={cart} />
+      <div>
+        <CheckoutCart cart={cart} />
+      </div>
 
       <label>Please scan card: </label>
       <input onChange={handleCardChange} />
@@ -67,3 +70,20 @@ function Checkout() {
 }
 
 export default Checkout;
+
+async function recordTransaction(data: { name: string; price: number }[]) {
+  const response: Response = await fetch(
+    "http://localhost:3001/recordTransaction",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!response.ok) {
+    alert("Transaction NOT recorded");
+  }
+}
