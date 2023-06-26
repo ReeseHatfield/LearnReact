@@ -27,6 +27,9 @@ Before you start using OpenPOS, you need to get it onto your computer. This invo
 
 *in progress*
 
+## License
+[License](https://github.com/ReeseHatfield/OpenPOS/blob/main/LICENSE)
+
 ## Contributing
 
 If you're interested in contributing to OpenPOS, please follow these steps:
