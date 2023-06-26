@@ -5,9 +5,9 @@ OpenPOS is a versatile and adaptable point-of-sale application built primarily i
 ## Table of Contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -16,14 +16,19 @@ OpenPOS is a versatile and adaptable point-of-sale application built primarily i
 
 - **Point-of-Sale Operations**: Comprehensive functionality to cover typical retail transactions.
 - **Customizability**: Highly adaptable to suit a variety of business needs.
-- **Modern Technologies**: Built using TypeScript, CSS, and HTML.
+- **Modern Technologies**: Built using TypeScript, CSS, and React.
+
+## Screenshots
+![login](./screenshots/login.PNG)
+![pos](./screenshots/pos.PNG)
+![checkout](./screenshots/checkout.PNG)
 
 ## Getting Started
 
 Before you start using OpenPOS, you need to get it onto your computer. This involves cloning the repository from GitHub.
 ```git clone https://github.com/ReeseHatfield/OpenPOS.git```
 
-## Installation and Usage
+## Installation
 
 *in progress*
 
