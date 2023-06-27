@@ -1,5 +1,5 @@
 .text-area{
-    height: 175px;
+    height: 210px;
     width: 130px;
     overflow: auto;
     background-color: #4087e8;
@@ -12,6 +12,7 @@
     font-size: 16px;
     margin: 4px 2px;
     position: relative;
+    border-radius: 10px;
 }
 
 .cart-list {

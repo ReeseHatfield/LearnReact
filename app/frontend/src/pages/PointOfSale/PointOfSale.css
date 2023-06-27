@@ -12,12 +12,14 @@
     vertical-align: center;
 }
 .util{
-    background-color: #0a3622;
+    background-color: #2ecc71;
     /*Temporary bg color*/
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     position: relative;
     padding: 10px 10px;
+    border-radius: 15px;
+    border: 5px solid black
 }
 
 .sales-item-container{
