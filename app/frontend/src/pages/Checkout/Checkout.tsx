@@ -26,11 +26,11 @@ function Checkout() {
     });
 
     if (response.ok) {
-      alert("CARD WENT THRU");
+      alert("Card Accepted");
       await recordTransaction(cart);
       navigate("/pos");
     } else {
-      alert("NO CARD :(");
+      alert("Card Rejected");
     }
   };
 
