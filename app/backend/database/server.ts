@@ -44,6 +44,12 @@ app.post("/verifyUser", (req: Request, res: Response) => {
   }
 });
 
+app.get("/download", (req: Request, res: Response) => {
+  const file: string = `${__dirname}/data/transactions.json`;
+  res.download(file);
+  // set disposition and send file to client.
+});
+
 app.post("/recordTransaction", (req: Request, res: Response): void => {
   const data = req.body;
   if (db.recordTransaction(data)) {

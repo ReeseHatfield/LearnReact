@@ -27,6 +27,29 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
     //promise ignored, state hook updated
   };
 
+  const handleExport = () => {
+    fetch("http://localhost:3001/download")
+        .then((response) => response.blob())
+        .then((blob) => {
+          // Create a new object URL for the blob
+          const url = window.URL.createObjectURL(new Blob([blob]));
+
+          // Create a link element
+          const link = document.createElement("a");
+
+          // Set properties of link
+          link.href = url;
+          link.setAttribute("download", "transactions.json");
+
+          // Append to HTML
+          document.body.appendChild(link);
+
+          // Click link to start download then remove it
+          link.click();
+          link.parentNode.removeChild(link);
+        });
+  };
+
   const handleCheckout = async () => {
     setCart([]);
     navigate("/checkout", { state: cart });
@@ -46,7 +69,7 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
         <div className="util">
           <LogOutButton onLogOut={handleLogOut} />
           <CheckoutButton handleCheckout={handleCheckout} />
-          <ExportButton />
+          <ExportButton onClick={handleExport}/>
           <CartText cart={cart} />
         </div>
       </div>
@@ -57,7 +80,7 @@ function PointOfSale({ isUser }: PointOfSalePageProps) {
 function initializePOSItems(
   handleAddItem: (name: string, price: number) => void
 ) {
-  const items = [
+  const items: {name: string, price: number}[] = [
     { name: "Latte", price: 3.5 },
     { name: "Pastry", price: 2.25 },
     { name: "Sandwich", price: 6.75 },
