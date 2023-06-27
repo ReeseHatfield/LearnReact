@@ -7,7 +7,7 @@ OpenPOS is a versatile and adaptable point-of-sale application built primarily i
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
-- [Installation](#installation)
+- [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -29,9 +29,9 @@ OpenPOS is a versatile and adaptable point-of-sale application built primarily i
 Before you start using OpenPOS, you need to get it onto your computer. This involves cloning the repository from GitHub.
 ```git clone https://github.com/ReeseHatfield/OpenPOS.git```
 
-## Installation
+## Usage
 
-*in progress*
+After cloning the repo, you'll need to host the server that handles user authentication, card verifcation, and other misc utilities. Start by running the ```server_start.bat``` or ```server_start.sh``` on Linux/Mac or Windows respectively. Then run ```npm run electron-start``` in the ```/app``` directory. This will host OpenPOS in a web browser and desktop app, for whatever your use-case may be.
 
 ## License
 [License](https://github.com/ReeseHatfield/OpenPOS/blob/main/LICENSE)
