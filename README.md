@@ -17,7 +17,7 @@ OpenPOS is a versatile and adaptable point-of-sale application built primarily i
 - **Point-of-Sale Operations**: Comprehensive functionality to cover typical retail transactions.
 - **Customizability**: Highly adaptable to suit a variety of business needs.
 - **Modern Technologies**: Built using TypeScript, CSS, and React.
-- **Server-side User Authentication**: A secure solution for authenicating user and their logins
+- **Server-side User Authentication**: A secure solution for authenicating user and their logins, as well as checkouts
 
 ## Screenshots
 ![login](./screenshots/login.PNG)
